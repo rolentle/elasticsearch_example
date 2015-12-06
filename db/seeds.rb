@@ -14,9 +14,10 @@ class PrimaryCareFacilitiesEtl
 
   def filtered_facilities
     primary_care_facilities.map do |facility|
+      lat = facility["geometry"]["coordinates"][1]
+      long = facility["geometry"]["coordinates"][0]
       {
-        lat: facility["geometry"]["coordinates"][1],
-        long: facility["geometry"]["coordinates"][0],
+        location: "#{lat},#{long}",
         name: facility["properties"]["NAME"],
         address: facility["properties"]["ADDRESS"],
         city: facility["properties"]["CITY"],
